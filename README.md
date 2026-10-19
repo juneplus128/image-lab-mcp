@@ -1,46 +1,5 @@
-# AI 도구 연결 실습
 
-## 실습 1 — 학식 알리미 AI
-
-코드 블록 오른쪽 위 복사 버튼을 눌러 전체 코드를 복사하세요.
-
-```python
-import google.generativeai as genai
-
-def get_cafeteria_menu(day: str) -> str:
-    """특정 요일의 우리 학교 학생식당 메뉴를 알려줍니다."""
-    menus = {
-        "월요일": "치즈돈까스와 미니우동",
-        "화요일": "제육덮밥과 계란국",
-        "수요일": "치킨마요 덮밥",
-        "목요일": "마라탕",
-        "금요일": "새우볶음밥"
-    }
-    return menus.get(day, "그 날은 식당이 쉬는 날이거나 메뉴 정보가 없어요!")
-
-genai.configure(api_key="본인의_API_키를_여기에_붙여넣으세요") # 여기에 API 키 넣기!
-
-model = genai.GenerativeModel(
-    model_name='gemini-3.5-flash',
-    tools=[get_cafeteria_menu]
-)
-
-chat = model.start_chat(enable_automatic_function_calling=True)
-
-print("🤖 컴공 학식 알리미 AI가 켜졌습니다! (종료하려면 '끝' 입력)")
-print("질문 예시: '이번 주 수요일 학식 메뉴가 뭐야?'\n")
-
-while True:
-    user_input = input("학생: ")
-    if user_input == '끝':
-        print("🤖 대화를 종료합니다.")
-        break
-
-    response = chat.send_message(user_input)
-    print(f"🤖 제미나이: {response.text}\n")
-```
-
-## 실습 2 — 이미지 업스케일러
+## 실습 1 — 이미지 업스케일러
 
 [학생용 ZIP 다운로드 · 0.6.0](https://github.com/mark00425-sys/image-lab-mcp/releases/download/v0.6.0/Image-Lab-Student-Pack-0.6.0-sample.zip)
 
